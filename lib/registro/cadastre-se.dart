@@ -50,8 +50,8 @@ class _CadastreseState extends State<Cadastrese> {
                     //Mudou mandou para a String
 
                   },
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
                     hintText: 'Nome',
                   ),
                 ),
@@ -65,8 +65,8 @@ class _CadastreseState extends State<Cadastrese> {
                     //Mudou mandou para a String
 
                   },
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
                     hintText: 'Idade',
                   ),
                 ),
@@ -80,8 +80,8 @@ class _CadastreseState extends State<Cadastrese> {
                     //Mudou mandou para a String
 
                   },
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
                     hintText: 'Email',
                   ),
                 ),
@@ -95,15 +95,15 @@ class _CadastreseState extends State<Cadastrese> {
                     //Mudou mandou para a String
 
                   },
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
                     hintText: 'Senha',
                   ),
                 ),
               ),
               Container(
                 padding: const EdgeInsets.all(16),
-                child: Text(
+                child: const Text(
                   'Seu genero'
                 )
               ),
@@ -114,7 +114,7 @@ class _CadastreseState extends State<Cadastrese> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CheckboxListTile(
-                      title: Text(
+                      title: const Text(
                         'Masculino',
                       ),
                       value: masculino,
@@ -133,7 +133,7 @@ class _CadastreseState extends State<Cadastrese> {
                       controlAffinity: ListTileControlAffinity.leading,
                     ),
                     CheckboxListTile(
-                      title: Text(
+                      title: const Text(
                         'Feminino'
                       ),
                       value: Feminino,
@@ -157,7 +157,7 @@ class _CadastreseState extends State<Cadastrese> {
               ),
               Container(
                   padding: const EdgeInsets.all(16),
-                  child: Text(
+                  child: const Text(
                       'Estou procurando'
                   )
               ),
@@ -168,7 +168,7 @@ class _CadastreseState extends State<Cadastrese> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CheckboxListTile(
-                      title: Text(
+                      title: const Text(
                         'Um Homem',
                       ),
                       value: masculinoprocura,
@@ -187,8 +187,8 @@ class _CadastreseState extends State<Cadastrese> {
                       controlAffinity: ListTileControlAffinity.leading,
                     ),
                     CheckboxListTile(
-                      title: Text(
-                          'Uma mulher'
+                      title: const Text(
+                          'Uma Mulher'
                       ),
                       value: Femininoprocura,
                       onChanged: (value) {
@@ -281,6 +281,18 @@ class _CadastreseState extends State<Cadastrese> {
                                   );
                                 }else{
 
+                                  String url = '';
+                                  if(masculino == true){
+                                    setState(() {
+                                      url = 'https://raw.githubusercontent.com/HeroRickyGAMES/Lovers-KanjoProject/master/assets/corporate-user-icon.png';
+                                    });
+                                  }
+                                  if(Feminino == true){
+                                    setState(() {
+                                      url = 'https://raw.githubusercontent.com/HeroRickyGAMES/Lovers-KanjoProject/master/assets/img_529937.png';
+                                    });
+                                  }
+
                                   Position currentPosition = await Geolocator.getCurrentPosition(
                                     desiredAccuracy: LocationAccuracy.high,
                                   );
@@ -291,7 +303,7 @@ class _CadastreseState extends State<Cadastrese> {
                                   );
                                   Placemark placemark = placemarks.first;
 
-                                  String LocalizacaoAgora = '${placemark.street}, ${placemark.subLocality}, ${placemark.locality}, ${placemark.administrativeArea} ${placemark.postalCode}, ${placemark.country}';
+                                  String LocalizacaoAgora = '${placemark.street}, ${placemark.subLocality}, ${placemark.locality} ${placemark.subAdministrativeArea}, ${placemark.administrativeArea} ${placemark.postalCode}, ${placemark.country}';
 
                                   String Latitude = '${currentPosition.latitude}';
                                   String longitude = '${currentPosition.longitude}';
@@ -309,6 +321,9 @@ class _CadastreseState extends State<Cadastrese> {
                                       'Latitude': Latitude,
                                       'Longitude': longitude,
                                       'Localizacao': LocalizacaoAgora,
+                                      'urlImage': url,
+                                      'LocalizaçãoDefault': '${placemark.subAdministrativeArea}',
+                                      'LocalizaçãoDefaultEmCidade': '${placemark.administrativeArea}'
                                     });
                                   }).then((value){
                                     Navigator.pop(context);
